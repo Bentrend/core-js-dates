@@ -172,11 +172,11 @@ function isDateInPeriod(date, period) {
  * '2010-12-15T22:59:00.000Z' => '12/15/2010, 10:59:00 PM'
  */
 function formatDate(date) {
-  return new Date(
-    new Date(date).setMilliseconds(-3 * 60 * 60 * 1000)
-  ).toLocaleString('en-US');
+  const offset = new Date(date).getTimezoneOffset() / 60;
+  return new Date(new Date(date).getTime() + offset * 3600000).toLocaleString(
+    'en-US'
+  );
 }
-
 /**
  * Returns the total number of weekend days (Saturdays and Sundays) in a specified month and year.
  *
